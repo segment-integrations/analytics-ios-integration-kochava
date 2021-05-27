@@ -1,0 +1,695 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		047B492275E9998902C34833 /* libPods-Segment-KochavaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E67DFCFDC303C925753A6127 /* libPods-Segment-KochavaTests.a */; };
+		67C8B9C37D62DD48C64FE24E /* libPods-Segment-Kochava.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA0A14907B74D697269B2F0 /* libPods-Segment-Kochava.a */; };
+		8C2AD43B265F158A0028D4D3 /* Segment_KochavaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2AD439265F158A0028D4D3 /* Segment_KochavaUITests.m */; };
+		8C2AD43F265F15980028D4D3 /* Segment_KochavaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2AD43D265F15980028D4D3 /* Segment_KochavaTests.m */; };
+		8CFE90F3264205A500D96EC8 /* SEGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE90F2264205A500D96EC8 /* SEGAppDelegate.m */; };
+		8CFE90F6264205A500D96EC8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE90F5264205A500D96EC8 /* SceneDelegate.m */; };
+		8CFE90F9264205A500D96EC8 /* SEGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE90F8264205A500D96EC8 /* SEGViewController.m */; };
+		8CFE90FC264205A500D96EC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CFE90FA264205A500D96EC8 /* Main.storyboard */; };
+		8CFE90FE264205A600D96EC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CFE90FD264205A600D96EC8 /* Assets.xcassets */; };
+		8CFE9101264205A600D96EC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CFE90FF264205A600D96EC8 /* LaunchScreen.storyboard */; };
+		8CFE9104264205A600D96EC8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE9103264205A600D96EC8 /* main.m */; };
+		8CFE912A26421A0D00D96EC8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 8CFE912726421A0D00D96EC8 /* LICENSE */; };
+		8CFE912B26421A0D00D96EC8 /* Segment-Kochava.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8CFE912826421A0D00D96EC8 /* Segment-Kochava.podspec */; };
+		8CFE912C26421A0D00D96EC8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8CFE912926421A0D00D96EC8 /* README.md */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8CFE910A264205A600D96EC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CFE90E6264205A500D96EC8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CFE90ED264205A500D96EC8;
+			remoteInfo = "Segment-Kochava";
+		};
+		8CFE9115264205A600D96EC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CFE90E6264205A500D96EC8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CFE90ED264205A500D96EC8;
+			remoteInfo = "Segment-Kochava";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2B86D1D6E334398F96B4B4DF /* Pods-Segment-Kochava.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Kochava.release.xcconfig"; path = "Target Support Files/Pods-Segment-Kochava/Pods-Segment-Kochava.release.xcconfig"; sourceTree = "<group>"; };
+		5ADD7F4B4FF83AAB9A5BD528 /* Pods-Segment-KochavaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-KochavaTests.release.xcconfig"; path = "Target Support Files/Pods-Segment-KochavaTests/Pods-Segment-KochavaTests.release.xcconfig"; sourceTree = "<group>"; };
+		8C2AD438265F158A0028D4D3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C2AD439265F158A0028D4D3 /* Segment_KochavaUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Segment_KochavaUITests.m; sourceTree = "<group>"; };
+		8C2AD43C265F15980028D4D3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C2AD43D265F15980028D4D3 /* Segment_KochavaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Segment_KochavaTests.m; sourceTree = "<group>"; };
+		8CD6C12D2656FBD30010D084 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		8CFE90EE264205A500D96EC8 /* Segment-Kochava.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Segment-Kochava.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CFE90F1264205A500D96EC8 /* SEGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEGAppDelegate.h; sourceTree = "<group>"; };
+		8CFE90F2264205A500D96EC8 /* SEGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEGAppDelegate.m; sourceTree = "<group>"; };
+		8CFE90F4264205A500D96EC8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		8CFE90F5264205A500D96EC8 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		8CFE90F7264205A500D96EC8 /* SEGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEGViewController.h; sourceTree = "<group>"; };
+		8CFE90F8264205A500D96EC8 /* SEGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEGViewController.m; sourceTree = "<group>"; };
+		8CFE90FB264205A500D96EC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8CFE90FD264205A600D96EC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8CFE9100264205A600D96EC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8CFE9102264205A600D96EC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CFE9103264205A600D96EC8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8CFE9109264205A600D96EC8 /* Segment-KochavaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Segment-KochavaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CFE9114264205A600D96EC8 /* Segment-KochavaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Segment-KochavaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CFE912726421A0D00D96EC8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
+		8CFE912826421A0D00D96EC8 /* Segment-Kochava.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Segment-Kochava.podspec"; path = "../../Segment-Kochava.podspec"; sourceTree = "<group>"; };
+		8CFE912926421A0D00D96EC8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		CCA0A14907B74D697269B2F0 /* libPods-Segment-Kochava.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Segment-Kochava.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD645E1A58AEA656209B5DEF /* Pods-Segment-KochavaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-KochavaTests.debug.xcconfig"; path = "Target Support Files/Pods-Segment-KochavaTests/Pods-Segment-KochavaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E67DFCFDC303C925753A6127 /* libPods-Segment-KochavaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Segment-KochavaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6DE78EA10FF0CAF862A8AB9 /* Pods-Segment-Kochava.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Kochava.debug.xcconfig"; path = "Target Support Files/Pods-Segment-Kochava/Pods-Segment-Kochava.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8CFE90EB264205A500D96EC8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67C8B9C37D62DD48C64FE24E /* libPods-Segment-Kochava.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CFE9106264205A600D96EC8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				047B492275E9998902C34833 /* libPods-Segment-KochavaTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CFE9111264205A600D96EC8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2777CBC0CF91199AE99BD959 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E6DE78EA10FF0CAF862A8AB9 /* Pods-Segment-Kochava.debug.xcconfig */,
+				2B86D1D6E334398F96B4B4DF /* Pods-Segment-Kochava.release.xcconfig */,
+				CD645E1A58AEA656209B5DEF /* Pods-Segment-KochavaTests.debug.xcconfig */,
+				5ADD7F4B4FF83AAB9A5BD528 /* Pods-Segment-KochavaTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8C2AD436265F14ED0028D4D3 /* Segment-KochavaTests */ = {
+			isa = PBXGroup;
+			children = (
+				8CD6C12D2656FBD30010D084 /* Tests-Prefix.pch */,
+				8C2AD43C265F15980028D4D3 /* Info.plist */,
+				8C2AD43D265F15980028D4D3 /* Segment_KochavaTests.m */,
+			);
+			path = "Segment-KochavaTests";
+			sourceTree = "<group>";
+		};
+		8C2AD437265F14FA0028D4D3 /* Segment-KochavaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8C2AD438265F158A0028D4D3 /* Info.plist */,
+				8C2AD439265F158A0028D4D3 /* Segment_KochavaUITests.m */,
+			);
+			path = "Segment-KochavaUITests";
+			sourceTree = "<group>";
+		};
+		8CFE90E5264205A500D96EC8 = {
+			isa = PBXGroup;
+			children = (
+				8C2AD437265F14FA0028D4D3 /* Segment-KochavaUITests */,
+				8C2AD436265F14ED0028D4D3 /* Segment-KochavaTests */,
+				8CFE91262642175700D96EC8 /* Podspec Metadata */,
+				8CFE90F0264205A500D96EC8 /* Segment-Kochava */,
+				8CFE90EF264205A500D96EC8 /* Products */,
+				2777CBC0CF91199AE99BD959 /* Pods */,
+				98CEEA4B795813656F800CD3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8CFE90EF264205A500D96EC8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8CFE90EE264205A500D96EC8 /* Segment-Kochava.app */,
+				8CFE9109264205A600D96EC8 /* Segment-KochavaTests.xctest */,
+				8CFE9114264205A600D96EC8 /* Segment-KochavaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8CFE90F0264205A500D96EC8 /* Segment-Kochava */ = {
+			isa = PBXGroup;
+			children = (
+				8CFE90F1264205A500D96EC8 /* SEGAppDelegate.h */,
+				8CFE90F2264205A500D96EC8 /* SEGAppDelegate.m */,
+				8CFE90F4264205A500D96EC8 /* SceneDelegate.h */,
+				8CFE90F5264205A500D96EC8 /* SceneDelegate.m */,
+				8CFE90F7264205A500D96EC8 /* SEGViewController.h */,
+				8CFE90F8264205A500D96EC8 /* SEGViewController.m */,
+				8CFE90FA264205A500D96EC8 /* Main.storyboard */,
+				8CFE90FD264205A600D96EC8 /* Assets.xcassets */,
+				8CFE90FF264205A600D96EC8 /* LaunchScreen.storyboard */,
+				8CFE9102264205A600D96EC8 /* Info.plist */,
+				8CFE9103264205A600D96EC8 /* main.m */,
+			);
+			path = "Segment-Kochava";
+			sourceTree = "<group>";
+		};
+		8CFE91262642175700D96EC8 /* Podspec Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				8CFE912826421A0D00D96EC8 /* Segment-Kochava.podspec */,
+				8CFE912726421A0D00D96EC8 /* LICENSE */,
+				8CFE912926421A0D00D96EC8 /* README.md */,
+			);
+			path = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		98CEEA4B795813656F800CD3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CCA0A14907B74D697269B2F0 /* libPods-Segment-Kochava.a */,
+				E67DFCFDC303C925753A6127 /* libPods-Segment-KochavaTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8CFE90ED264205A500D96EC8 /* Segment-Kochava */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CFE911D264205A600D96EC8 /* Build configuration list for PBXNativeTarget "Segment-Kochava" */;
+			buildPhases = (
+				42F731337C9BF616B30FB0D3 /* [CP] Check Pods Manifest.lock */,
+				8CFE90EA264205A500D96EC8 /* Sources */,
+				8CFE90EB264205A500D96EC8 /* Frameworks */,
+				8CFE90EC264205A500D96EC8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Segment-Kochava";
+			productName = "Segment-Kochava";
+			productReference = 8CFE90EE264205A500D96EC8 /* Segment-Kochava.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8CFE9108264205A600D96EC8 /* Segment-KochavaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CFE9120264205A600D96EC8 /* Build configuration list for PBXNativeTarget "Segment-KochavaTests" */;
+			buildPhases = (
+				7B28FA81FBCDCD178CF427D5 /* [CP] Check Pods Manifest.lock */,
+				8CFE9105264205A600D96EC8 /* Sources */,
+				8CFE9106264205A600D96EC8 /* Frameworks */,
+				8CFE9107264205A600D96EC8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8CFE910B264205A600D96EC8 /* PBXTargetDependency */,
+			);
+			name = "Segment-KochavaTests";
+			productName = "Segment-KochavaTests";
+			productReference = 8CFE9109264205A600D96EC8 /* Segment-KochavaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8CFE9113264205A600D96EC8 /* Segment-KochavaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CFE9123264205A600D96EC8 /* Build configuration list for PBXNativeTarget "Segment-KochavaUITests" */;
+			buildPhases = (
+				8CFE9110264205A600D96EC8 /* Sources */,
+				8CFE9111264205A600D96EC8 /* Frameworks */,
+				8CFE9112264205A600D96EC8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8CFE9116264205A600D96EC8 /* PBXTargetDependency */,
+			);
+			name = "Segment-KochavaUITests";
+			productName = "Segment-KochavaUITests";
+			productReference = 8CFE9114264205A600D96EC8 /* Segment-KochavaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8CFE90E6264205A500D96EC8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = Segment;
+				TargetAttributes = {
+					8CFE90ED264205A500D96EC8 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					8CFE9108264205A600D96EC8 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 8CFE90ED264205A500D96EC8;
+					};
+					8CFE9113264205A600D96EC8 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 8CFE90ED264205A500D96EC8;
+					};
+				};
+			};
+			buildConfigurationList = 8CFE90E9264205A500D96EC8 /* Build configuration list for PBXProject "Segment-Kochava" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8CFE90E5264205A500D96EC8;
+			productRefGroup = 8CFE90EF264205A500D96EC8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8CFE90ED264205A500D96EC8 /* Segment-Kochava */,
+				8CFE9108264205A600D96EC8 /* Segment-KochavaTests */,
+				8CFE9113264205A600D96EC8 /* Segment-KochavaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8CFE90EC264205A500D96EC8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CFE912C26421A0D00D96EC8 /* README.md in Resources */,
+				8CFE9101264205A600D96EC8 /* LaunchScreen.storyboard in Resources */,
+				8CFE90FE264205A600D96EC8 /* Assets.xcassets in Resources */,
+				8CFE912B26421A0D00D96EC8 /* Segment-Kochava.podspec in Resources */,
+				8CFE912A26421A0D00D96EC8 /* LICENSE in Resources */,
+				8CFE90FC264205A500D96EC8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CFE9107264205A600D96EC8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CFE9112264205A600D96EC8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		42F731337C9BF616B30FB0D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Segment-Kochava-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B28FA81FBCDCD178CF427D5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Segment-KochavaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8CFE90EA264205A500D96EC8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CFE90F9264205A500D96EC8 /* SEGViewController.m in Sources */,
+				8CFE90F3264205A500D96EC8 /* SEGAppDelegate.m in Sources */,
+				8CFE9104264205A600D96EC8 /* main.m in Sources */,
+				8CFE90F6264205A500D96EC8 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CFE9105264205A600D96EC8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C2AD43F265F15980028D4D3 /* Segment_KochavaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CFE9110264205A600D96EC8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C2AD43B265F158A0028D4D3 /* Segment_KochavaUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8CFE910B264205A600D96EC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CFE90ED264205A500D96EC8 /* Segment-Kochava */;
+			targetProxy = 8CFE910A264205A600D96EC8 /* PBXContainerItemProxy */;
+		};
+		8CFE9116264205A600D96EC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CFE90ED264205A500D96EC8 /* Segment-Kochava */;
+			targetProxy = 8CFE9115264205A600D96EC8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8CFE90FA264205A500D96EC8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8CFE90FB264205A500D96EC8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8CFE90FF264205A600D96EC8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8CFE9100264205A600D96EC8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8CFE911B264205A600D96EC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8CFE911C264205A600D96EC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8CFE911E264205A600D96EC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6DE78EA10FF0CAF862A8AB9 /* Pods-Segment-Kochava.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Segment-Kochava/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Segment-Kochava";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8CFE911F264205A600D96EC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B86D1D6E334398F96B4B4DF /* Pods-Segment-Kochava.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Segment-Kochava/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Segment-Kochava";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8CFE9121264205A600D96EC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD645E1A58AEA656209B5DEF /* Pods-Segment-KochavaTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "Segment-KochavaTests/Tests-Prefix.pch";
+				INFOPLIST_FILE = "Segment-KochavaTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Segment-KochavaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Segment-Kochava.app/Segment-Kochava";
+			};
+			name = Debug;
+		};
+		8CFE9122264205A600D96EC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5ADD7F4B4FF83AAB9A5BD528 /* Pods-Segment-KochavaTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "Segment-KochavaTests/Tests-Prefix.pch";
+				INFOPLIST_FILE = "Segment-KochavaTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Segment-KochavaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Segment-Kochava.app/Segment-Kochava";
+			};
+			name = Release;
+		};
+		8CFE9124264205A600D96EC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Segment-KochavaUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Segment-KochavaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Segment-Kochava";
+			};
+			name = Debug;
+		};
+		8CFE9125264205A600D96EC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Segment-KochavaUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Segment-KochavaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Segment-Kochava";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8CFE90E9264205A500D96EC8 /* Build configuration list for PBXProject "Segment-Kochava" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CFE911B264205A600D96EC8 /* Debug */,
+				8CFE911C264205A600D96EC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CFE911D264205A600D96EC8 /* Build configuration list for PBXNativeTarget "Segment-Kochava" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CFE911E264205A600D96EC8 /* Debug */,
+				8CFE911F264205A600D96EC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CFE9120264205A600D96EC8 /* Build configuration list for PBXNativeTarget "Segment-KochavaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CFE9121264205A600D96EC8 /* Debug */,
+				8CFE9122264205A600D96EC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CFE9123264205A600D96EC8 /* Build configuration list for PBXNativeTarget "Segment-KochavaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CFE9124264205A600D96EC8 /* Debug */,
+				8CFE9125264205A600D96EC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8CFE90E6264205A500D96EC8 /* Project object */;
+}

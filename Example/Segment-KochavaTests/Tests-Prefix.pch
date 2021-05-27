@@ -1,0 +1,27 @@
+//
+//  Tests-Prefix.pch
+//  Segment-KochavaTests
+//
+//  Created by Ian Mak on 5/20/21.
+//  Copyright © 2021 Segment. All rights reserved.
+//
+
+#ifndef Tests_Prefix_h
+#define Tests_Prefix_h
+
+#ifdef __OBJC__
+
+#if defined(__has_include) && __has_include(<Analytics/SEGAnalytics.h>)
+#import <Analytics/SEGAnalytics.h>
+#else
+#import <Segment/SEGAnalytics.h>
+#endif /* __has_include */
+
+#import <Expecta/Expecta.h>
+#import <Specta/Specta.h>
+#import <OCMockito/OCMockito.h>
+#import <OCHamcrest/OCHamcrest.h>
+
+#endif /* __OBJC__ */
+
+#endif /* Tests_Prefix_h */

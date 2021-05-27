@@ -1,0 +1,12 @@
+platform :ios, '11.0'
+
+target 'Segment-Kochava' do
+  pod 'Segment-Kochava', :path => '../'
+end
+
+target 'Segment-KochavaTests' do
+  pod 'Segment-Kochava', :path => '../'
+  pod 'OCMockito'
+  pod 'Specta'
+  pod 'Expecta'
+end

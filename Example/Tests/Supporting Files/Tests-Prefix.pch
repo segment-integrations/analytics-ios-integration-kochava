@@ -1,0 +1,18 @@
+//
+//  Tests-Prefix.m
+//  Segment-KochavaTests
+//
+//  Created by Ian Mak on 5/14/21.
+//  Copyright © 2021 Segment. All rights reserved.
+//
+
+#ifdef __OBJ_C__
+
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+#import <OCMockito/OCMockito.h>
+#import <OCHamcrest/OCHamcrest.h>
+#import <Analytics/SEGAnalytics.h>
+#import <Expecta/Expecta.h>
+
+#endif
