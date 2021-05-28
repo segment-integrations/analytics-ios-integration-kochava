@@ -14,11 +14,11 @@
 #import <Segment/SEGAnalyticsUtils.h>
 #endif
 
-NSString *const SK_EnforceATT = @"enforceAtt";
-NSString *const SK_CustomPromptLength = @"customPromptLength";
-NSString *const SK_ApiKey = @"apiKey";
-NSString *const SK_SubscribeToNotifications = @"subscribeToNotifications";
-NSString *const SK_UserId = @"User ID";
+NSString *const SK_Config_EnforceATT = @"enforceAtt";
+NSString *const SK_Config_CustomPromptLength = @"customPromptLength";
+NSString *const SK_Config_ApiKey = @"apiKey";
+NSString *const SK_Config_SubscribeToNotifications = @"subscribeToNotifications";
+NSString *const SK_Identify_UserId = @"User ID";
 NSString *const SK_Track_DeepLinkOpened = @"Deep Link Opened";
 
 @interface KochavaEventManager()
@@ -74,18 +74,35 @@ static	 KochavaEventManager *sharedInstance = nil;
         }
         
         KochavaEventManager.shared.tracker = self.tracker;
-        
-        // tracking setup
-        if (settings[SK_EnforceATT]) {
-            self.tracker.appTrackingTransparency.enabledBool = settings[SK_EnforceATT];
+
+        // SKAd notification subscription
+        if ([settings[SK_Config_SubscribeToNotifications] isEqual:@YES]) {
+            KVAAdNetworkConversionDidUpdateValueBlock conversionDidUpdateValueBlock = ^(KVAAdNetworkConversion *_Nonnull conversion, KVAAdNetworkConversionResult *_Nonnull result) {
+                NSLog(@"updateConversionValue() called with a value of %@", @(result.valueInt));
+            };
+            self.tracker.adNetwork.conversion.didUpdateValueBlock = conversionDidUpdateValueBlock;
+            
+            KVAAdNetworkDidRegisterAppForAttributionBlock didRegisterAppForAttributionBlock = ^(KVAAdNetwork *_Nonnull adNetwork) {
+                NSLog(@"registerAppForAdNetworkAttribution() called");
+            };
+            self.tracker.adNetwork.didRegisterAppForAttributionBlock = didRegisterAppForAttributionBlock;
         }
         
-        if (settings[SK_CustomPromptLength] && ([settings[SK_CustomPromptLength] isKindOfClass:NSNumber.class])) {
-            NSNumber *customPromptLength = settings[SK_CustomPromptLength];
-            self.tracker.appTrackingTransparency.authorizationStatusWaitTimeInterval = customPromptLength.doubleValue;
+        // App tracking transparency
+        if (settings[SK_Config_EnforceATT] != nil) {
+            self.tracker.appTrackingTransparency.enabledBool = settings[SK_Config_EnforceATT];
+        }
+        if (settings[SK_Config_CustomPromptLength] != nil) {
+            self.tracker.appTrackingTransparency.authorizationStatusWaitTimeInterval = [settings[SK_Config_CustomPromptLength] doubleValue];
         }
         
-        [self.tracker startWithAppGUIDString:settings[SK_ApiKey]];
+        // if the API key isn't given, can't start the tracker.
+        if (settings[SK_Config_ApiKey] != nil) {
+            [self.tracker startWithAppGUIDString:settings[SK_Config_ApiKey]];
+        }
+        else {
+            NSLog(@"Unable to start Kochava iOS tracker, API key not provided.");
+        }
     }
     return self;
 }
