@@ -108,7 +108,8 @@ static	 KochavaEventManager *sharedInstance = nil;
 }
 
 -(void)identify:(SEGIdentifyPayload *)payload {
-    [self.tracker.identityLink registerWithNameString:@"User ID" identifierString:payload.userId];
+    [self.tracker.identityLink registerWithNameString:@"User ID" identifierString:payload.anonymousId];
+    [self.tracker.identityLink registerWithNameString:@"Login" identifierString:payload.userId];
 }
 
 -(void)track:(SEGTrackPayload*)payload {
