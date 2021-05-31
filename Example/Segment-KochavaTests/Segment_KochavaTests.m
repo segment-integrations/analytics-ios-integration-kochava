@@ -24,7 +24,7 @@ describe(@"SegmentKochavaIntegration", ^{
         identityLink = mock(KVAIdentityLink.class);
         [given(tracker.identityLink) willReturn:identityLink];
         
-        integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SK_ApiKey:@"TEST_GUID"} andKochavaTracker:tracker];
+        integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SKConfigApiKey:@"TEST_GUID"} andKochavaTracker:tracker];
         
         [KochavaEventManager setShared:mock(KochavaEventManager.class)];
     });
@@ -55,7 +55,7 @@ describe(@"SegmentKochavaIntegration", ^{
         });
         
         it(@"Tracks deep links", ^{
-            SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:SK_Track_DeepLinkOpened
+            SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:SKTrackDeepLinkOpened
                                                                    properties:@{
                                                                        @"linkType": @"External",
                                                                        @"url": @"https://www.someothersite.com/redirect"
@@ -66,7 +66,7 @@ describe(@"SegmentKochavaIntegration", ^{
             [givenVoid([KochavaEventManager.shared sendEvent:anything()]) willDo:^id(NSInvocation *invocation) {
                 KVAEvent *event = [invocation mkt_arguments][0];
                 expect(event.eventType.nameString.description).to.equal(KVAEventType.deeplink.nameString.description);
-                expect(event.customEventNameString).to.equal(SK_Track_DeepLinkOpened);
+                expect(event.customEventNameString).to.equal(SKTrackDeepLinkOpened);
                 expect(event.uriString.description).to.equal(@"https://www.xoom.com/documents");
                 expect(event.infoDictionary).to.equal(@{
                     @"linkType": @"External",
