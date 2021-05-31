@@ -37,4 +37,6 @@ FOUNDATION_EXPORT NSString *const SK_Track_DeepLinkOpened;
 
 - (instancetype)initWithSettings:(NSDictionary*)settings andKochavaTracker:(id)kochava;
 
++ (instancetype)create;
+
 @end

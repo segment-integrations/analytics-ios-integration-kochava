@@ -61,6 +61,10 @@ static	 KochavaEventManager *sharedInstance = nil;
 
 @implementation SEGKochavaIntegration
 
++ (instancetype)create {
+    return [SEGKochavaIntegration alloc];
+}
+
 - (instancetype)initWithSettings:(NSDictionary*)settings andKochavaTracker:(id)tracker {
     if (self = [super init]) {
         // support for SKAdNetwork
