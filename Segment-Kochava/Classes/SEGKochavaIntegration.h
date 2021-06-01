@@ -12,11 +12,12 @@
 #import <Segment/SEGIntegration.h>
 #endif
 
-FOUNDATION_EXPORT NSString *const SK_EnforceATT;
-FOUNDATION_EXPORT NSString *const SK_CustomPromptLength;
-FOUNDATION_EXPORT NSString *const SK_ApiKey;
-FOUNDATION_EXPORT NSString *const SK_UserId;
-FOUNDATION_EXPORT NSString *const SK_Track_DeepLinkOpened;
+FOUNDATION_EXPORT NSString *const SKConfigEnforceATT;
+FOUNDATION_EXPORT NSString *const SKConfigCustomPromptLength;
+FOUNDATION_EXPORT NSString *const SKConfigApiKey;
+FOUNDATION_EXPORT NSString *const SKConfigSubscribeToNotifications;
+FOUNDATION_EXPORT NSString *const SKIdentifyUserId;
+FOUNDATION_EXPORT NSString *const SKTrackDeepLinkOpened;
 
 @interface KochavaEventManager:NSObject
 
