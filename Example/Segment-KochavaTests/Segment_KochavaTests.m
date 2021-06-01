@@ -196,21 +196,16 @@ SpecBegin(SegmentKochavaIntegrationFactory)
 
 describe(@"SegmentKochavaIntegrationFactory", ^{
     __block __strong Class mockIntegrationClass;
-    __block __strong SEGKochavaIntegration *mockIntegration;
-    __block __strong SEGAnalytics *analytics;
+    __block __strong SEGAnalytics *mockAnalytics;
 
     beforeEach(^{
         mockIntegrationClass = mockClass(SEGKochavaIntegration.class);
-        mockIntegration = mock(SEGKochavaIntegration.class);
-        analytics = mock(SEGAnalytics.class);
-        
-        stubSingleton(mockIntegrationClass, create);
-        [given([SEGKochavaIntegration create]) willReturn:mockIntegration];
+        mockAnalytics = mock(SEGAnalytics.class);
     });
     
     afterEach(^{
         mockIntegrationClass = nil;
-        mockIntegration = nil;
+        mockAnalytics = nil;
     });
     
     it(@"creates an integration instance", ^{
@@ -221,9 +216,11 @@ describe(@"SegmentKochavaIntegrationFactory", ^{
         };
         
         SEGKochavaIntegrationFactory *factory = [[SEGKochavaIntegrationFactory alloc] init];
-        [factory createWithSettings:settings forAnalytics:analytics];
+        SEGKochavaIntegration *integration = [factory createWithSettings:settings forAnalytics:mockAnalytics];
         
-        [verifyCount(mockIntegration, times(1)) initWithSettings:settings andKochavaTracker:nil];
+        expect(integration.tracker).toNot.beNil();
+        expect(integration.settings).to.equal(settings);
+        
     });
 });
 

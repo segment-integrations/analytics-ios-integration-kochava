@@ -21,7 +21,7 @@
 
 -(id<SEGIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(SEGAnalytics *)analytics
 {
-    return [[SEGKochavaIntegration create] initWithSettings:settings andKochavaTracker:nil];
+    return [[SEGKochavaIntegration alloc] initWithSettings:settings andKochavaTracker:nil];
 }
 
 - (nonnull NSString *)key {
