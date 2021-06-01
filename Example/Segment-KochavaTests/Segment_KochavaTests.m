@@ -25,7 +25,7 @@ describe(@"SegmentKochavaIntegration", ^{
         
         mockIdentityLink = mock(KVAIdentityLink.class);
         [given(mockTracker.identityLink) willReturn:mockIdentityLink];
-        
+
         [KochavaEventManager setShared:mock(KochavaEventManager.class)];
     });
 
@@ -47,7 +47,7 @@ describe(@"SegmentKochavaIntegration", ^{
         
         it(@"uses the default tracker", ^{
             integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
-                SK_Config_ApiKey: @"TEST_GUID"
+                SKConfigApiKey: @"TEST_GUID"
             }
                                                         andKochavaTracker: nil];
 
@@ -56,7 +56,7 @@ describe(@"SegmentKochavaIntegration", ^{
 
         it(@"uses a custom tracker", ^{
             integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
-                SK_Config_ApiKey: @"TEST_GUID"
+                SKConfigApiKey: @"TEST_GUID"
             }
                                                         andKochavaTracker: mockTracker];
 
@@ -70,8 +70,8 @@ describe(@"SegmentKochavaIntegration", ^{
 
         it(@"subscribes to notifications", ^{
             integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
-                SK_Config_ApiKey: @"TEST_GUID",
-                SK_Config_SubscribeToNotifications: @YES
+                SKConfigApiKey: @"TEST_GUID",
+                SKConfigSubscribeToNotifications: @YES
             }
                                                         andKochavaTracker: mockTracker];
 
@@ -82,7 +82,7 @@ describe(@"SegmentKochavaIntegration", ^{
 
         it(@"does not subscribe to notifications", ^{
             integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
-                SK_Config_ApiKey: @"TEST_GUID"
+                SKConfigApiKey: @"TEST_GUID"
             }
                                                         andKochavaTracker: mockTracker];
 
@@ -93,9 +93,9 @@ describe(@"SegmentKochavaIntegration", ^{
 
         it(@"enables application transparency ", ^{
             integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
-                SK_Config_ApiKey: @"TEST_GUID",
-                SK_Config_EnforceATT: @YES,
-                SK_Config_CustomPromptLength: @1000.0
+                SKConfigApiKey: @"TEST_GUID",
+                SKConfigEnforceATT: @YES,
+                SKConfigCustomPromptLength: @1000.0
             }
                                                         andKochavaTracker: mockTracker];
 
@@ -108,7 +108,7 @@ describe(@"SegmentKochavaIntegration", ^{
     
     describe(@"Tracking", ^{
         beforeEach(^{
-            integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SK_Config_ApiKey:@"TEST_GUID"} andKochavaTracker:mockTracker];
+            integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SKConfigApiKey:@"TEST_GUID"} andKochavaTracker:mockTracker];
         });
 
         it(@"tracks a normal event", ^{
@@ -135,8 +135,8 @@ describe(@"SegmentKochavaIntegration", ^{
             [integration track:payload];
         });
         
-        it(@"tracks a deep link", ^{
-            SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:SK_Track_DeepLinkOpened
+        it(@"Tracks deep links", ^{
+            SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:SKTrackDeepLinkOpened
                                                                    properties:@{
                                                                        @"linkType": @"External",
                                                                        @"url": @"https://www.someothersite.com/redirect"
@@ -147,7 +147,7 @@ describe(@"SegmentKochavaIntegration", ^{
             [givenVoid([KochavaEventManager.shared sendEvent:anything()]) willDo:^id(NSInvocation *invocation) {
                 KVAEvent *event = [invocation mkt_arguments][0];
                 expect(event.eventType.nameString.description).to.equal(KVAEventType.deeplink.nameString.description);
-                expect(event.customEventNameString).to.equal(SK_Track_DeepLinkOpened);
+                expect(event.customEventNameString).to.equal(SKTrackDeepLinkOpened);
                 expect(event.uriString.description).to.equal(@"https://www.xoom.com/documents");
                 expect(event.infoDictionary).to.equal(@{
                     @"linkType": @"External",
@@ -162,7 +162,7 @@ describe(@"SegmentKochavaIntegration", ^{
     
     describe(@"Identification", ^{
         beforeEach(^{
-            integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SK_Config_ApiKey:@"TEST_GUID"} andKochavaTracker:mockTracker];
+            integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SKConfigApiKey:@"TEST_GUID"} andKochavaTracker:mockTracker];
         });
 
         it(@"initial identification", ^{
@@ -215,9 +215,9 @@ describe(@"SegmentKochavaIntegrationFactory", ^{
     
     it(@"creates an integration instance", ^{
         NSDictionary *settings = @{
-            SK_Config_ApiKey: @"TEST_GUID",
-            SK_Config_EnforceATT: @YES,
-            SK_Config_CustomPromptLength: @1000.0
+            SKConfigApiKey: @"TEST_GUID",
+            SKConfigEnforceATT: @YES,
+            SKConfigCustomPromptLength: @1000.0
         };
         
         SEGKochavaIntegrationFactory *factory = [[SEGKochavaIntegrationFactory alloc] init];
