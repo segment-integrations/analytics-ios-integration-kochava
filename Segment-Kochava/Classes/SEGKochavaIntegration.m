@@ -62,6 +62,8 @@ static	 KochavaEventManager *sharedInstance = nil;
 
 - (instancetype)initWithSettings:(NSDictionary*)settings andKochavaTracker:(id)tracker {
     if (self = [super init]) {
+        self.settings = settings;
+        
         // support for SKAdNetwork
         [KVAAdNetworkProduct.shared register];
 
@@ -107,7 +109,8 @@ static	 KochavaEventManager *sharedInstance = nil;
 }
 
 -(void)identify:(SEGIdentifyPayload *)payload {
-    [self.tracker.identityLink registerWithNameString:@"User ID" identifierString:payload.userId];
+    [self.tracker.identityLink registerWithNameString:@"User ID" identifierString:payload.anonymousId];
+    [self.tracker.identityLink registerWithNameString:@"Login" identifierString:payload.userId];
 }
 
 -(void)track:(SEGTrackPayload*)payload {

@@ -21,14 +21,7 @@
 
 -(id<SEGIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(SEGAnalytics *)analytics
 {
-    // KVATracker *tracker = [KVATracker tracker];
-    // [tracker startWithAppGUIDString:@"kosegment-ios-sdk-test-doq96088y"];
-    
-    // NSMutableDictionary *newSettings = [[NSMutableDictionary alloc] initWithDictionary:settings];
-    // newSettings[ksApplicationGuid] = @"kosegment-ios-sdk-test-doq96088y";
-    
     return [[SEGKochavaIntegration alloc] initWithSettings:settings andKochavaTracker:nil];
-    // return [[SEGKochavaIntegration alloc] initWithSettings:newSettings andKochavaTracker:tracker];
 }
 
 - (nonnull NSString *)key {
