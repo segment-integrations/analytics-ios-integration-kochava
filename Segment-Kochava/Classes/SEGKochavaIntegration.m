@@ -62,6 +62,8 @@ static	 KochavaEventManager *sharedInstance = nil;
 
 - (instancetype)initWithSettings:(NSDictionary*)settings andKochavaTracker:(id)tracker {
     if (self = [super init]) {
+        self.settings = settings;
+        
         // support for SKAdNetwork
         [KVAAdNetworkProduct.shared register];
 
