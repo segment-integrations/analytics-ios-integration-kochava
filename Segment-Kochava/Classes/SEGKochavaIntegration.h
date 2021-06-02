@@ -12,21 +12,21 @@
 #import <Segment/SEGIntegration.h>
 #endif
 
+#if defined(TEST)
 FOUNDATION_EXPORT NSString *const SKConfigEnforceATT;
 FOUNDATION_EXPORT NSString *const SKConfigCustomPromptLength;
 FOUNDATION_EXPORT NSString *const SKConfigApiKey;
 FOUNDATION_EXPORT NSString *const SKConfigSubscribeToNotifications;
 FOUNDATION_EXPORT NSString *const SKIdentifyUserId;
+#endif
+
 FOUNDATION_EXPORT NSString *const SKTrackDeepLinkOpened;
 
 @interface KochavaEventManager:NSObject
 
 + (KochavaEventManager*)shared;
-+ (void)setShared:(KochavaEventManager*)shared;
 
-- (void)setTracker:(KVATracker*)tracker;
 - (void)sendEvent:(KVAEvent*)event;
-- (int)sendTest:(int)val;
 
 @end
 
