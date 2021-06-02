@@ -14,12 +14,12 @@
 #import <Segment/SEGAnalyticsUtils.h>
 #endif
 
-NSString *const SK_Config_EnforceATT = @"enforceAtt";
-NSString *const SK_Config_CustomPromptLength = @"customPromptLength";
-NSString *const SK_Config_ApiKey = @"apiKey";
-NSString *const SK_Config_SubscribeToNotifications = @"subscribeToNotifications";
-NSString *const SK_Identify_UserId = @"User ID";
-NSString *const SK_Track_DeepLinkOpened = @"Deep Link Opened";
+NSString *const SKConfigEnforceATT = @"enforceAtt";
+NSString *const SKConfigCustomPromptLength = @"customPromptLength";
+NSString *const SKConfigApiKey = @"apiKey";
+NSString *const SKConfigSubscribeToNotifications = @"subscribeToNotifications";
+NSString *const SKIdentifyUserId = @"User ID";
+NSString *const SKTrackDeepLinkOpened = @"Deep Link Opened";
 
 @interface KochavaEventManager()
 
@@ -44,7 +44,6 @@ static	 KochavaEventManager *sharedInstance = nil;
 + (void)setShared:(KochavaEventManager *)shared {
     @synchronized(self) {
         sharedInstance = shared;
-        
     }
 }
 
@@ -61,12 +60,10 @@ static	 KochavaEventManager *sharedInstance = nil;
 
 @implementation SEGKochavaIntegration
 
-+ (instancetype)create {
-    return [SEGKochavaIntegration alloc];
-}
-
 - (instancetype)initWithSettings:(NSDictionary*)settings andKochavaTracker:(id)tracker {
     if (self = [super init]) {
+        self.settings = settings;
+        
         // support for SKAdNetwork
         [KVAAdNetworkProduct.shared register];
 
@@ -80,7 +77,7 @@ static	 KochavaEventManager *sharedInstance = nil;
         KochavaEventManager.shared.tracker = self.tracker;
 
         // SKAd notification subscription
-        if ([settings[SK_Config_SubscribeToNotifications] isEqual:@YES]) {
+        if ([settings[SKConfigSubscribeToNotifications] boolValue]) {
             KVAAdNetworkConversionDidUpdateValueBlock conversionDidUpdateValueBlock = ^(KVAAdNetworkConversion *_Nonnull conversion, KVAAdNetworkConversionResult *_Nonnull result) {
                 NSLog(@"updateConversionValue() called with a value of %@", @(result.valueInt));
             };
@@ -93,16 +90,16 @@ static	 KochavaEventManager *sharedInstance = nil;
         }
         
         // App tracking transparency
-        if (settings[SK_Config_EnforceATT] != nil) {
-            self.tracker.appTrackingTransparency.enabledBool = settings[SK_Config_EnforceATT];
+        if (settings[SKConfigEnforceATT] != nil) {
+            self.tracker.appTrackingTransparency.enabledBool = [settings[SKConfigEnforceATT] boolValue];
         }
-        if (settings[SK_Config_CustomPromptLength] != nil) {
-            self.tracker.appTrackingTransparency.authorizationStatusWaitTimeInterval = [settings[SK_Config_CustomPromptLength] doubleValue];
+        if (settings[SKConfigCustomPromptLength] != nil) {
+            self.tracker.appTrackingTransparency.authorizationStatusWaitTimeInterval = [settings[SKConfigCustomPromptLength] doubleValue];
         }
         
         // if the API key isn't given, can't start the tracker.
-        if (settings[SK_Config_ApiKey] != nil) {
-            [self.tracker startWithAppGUIDString:settings[SK_Config_ApiKey]];
+        if (settings[SKConfigApiKey] != nil) {
+            [self.tracker startWithAppGUIDString:settings[SKConfigApiKey]];
         }
         else {
             NSLog(@"Unable to start Kochava iOS tracker, API key not provided.");
@@ -118,9 +115,9 @@ static	 KochavaEventManager *sharedInstance = nil;
 
 -(void)track:(SEGTrackPayload*)payload {
     KVAEvent *event = nil;
-    if ([payload.event isEqualToString: SK_Track_DeepLinkOpened]) {
+    if ([payload.event isEqualToString: SKTrackDeepLinkOpened]) {
         event = [KVAEvent eventWithType:KVAEventType.deeplink];
-        event.customEventNameString = SK_Track_DeepLinkOpened;
+        event.customEventNameString = SKTrackDeepLinkOpened;
         event.uriString = @"https://www.xoom.com/documents";
         event.infoDictionary = payload.properties;
     }
