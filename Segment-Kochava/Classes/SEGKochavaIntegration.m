@@ -20,6 +20,7 @@ NSString *const SKConfigApiKey = @"apiKey";
 NSString *const SKConfigSubscribeToNotifications = @"subscribeToNotifications";
 NSString *const SKIdentifyUserId = @"User ID";
 NSString *const SKTrackDeepLinkOpened = @"Deep Link Opened";
+NSString *const SKKochavaIntegrationName = @"Kochava iOS";
 
 @interface KochavaEventManager()
 
@@ -41,18 +42,8 @@ static	 KochavaEventManager *sharedInstance = nil;
     }
 }
 
-+ (void)setShared:(KochavaEventManager *)shared {
-    @synchronized(self) {
-        sharedInstance = shared;
-    }
-}
-
 - (void)sendEvent:(KVAEvent*)event {
     [event sendWithSenderArray:@[self.tracker]];
-}
-
-- (int)sendTest:(int)val {
-    return val * 2;
 }
 
 @end
@@ -111,19 +102,31 @@ static	 KochavaEventManager *sharedInstance = nil;
 -(void)identify:(SEGIdentifyPayload *)payload {
     [self.tracker.identityLink registerWithNameString:@"User ID" identifierString:payload.anonymousId];
     [self.tracker.identityLink registerWithNameString:@"Login" identifierString:payload.userId];
+    
+    NSDictionary *integration = payload.integrations[SKKochavaIntegrationName];
+    if (integration) {
+        for (NSString *key in integration.allKeys) {
+            [self.tracker.identityLink registerWithNameString:key identifierString:[integration[key] stringValue]];
+        }
+    }
 }
 
 -(void)track:(SEGTrackPayload*)payload {
+    NSMutableDictionary *props = [[NSMutableDictionary alloc] initWithDictionary:payload.properties];
+    if (payload.integrations[SKKochavaIntegrationName]) {
+        [props addEntriesFromDictionary:payload.integrations[SKKochavaIntegrationName]];
+    }
+    
     KVAEvent *event = nil;
     if ([payload.event isEqualToString: SKTrackDeepLinkOpened]) {
         event = [KVAEvent eventWithType:KVAEventType.deeplink];
         event.customEventNameString = SKTrackDeepLinkOpened;
         event.uriString = @"https://www.xoom.com/documents";
-        event.infoDictionary = payload.properties;
+        event.infoDictionary = props;
     }
     else {
         event = [KVAEvent customEventWithNameString:payload.event];
-        event.infoDictionary = payload.properties;
+        event.infoDictionary = props;
     }
     
     [KochavaEventManager.shared sendEvent:event];

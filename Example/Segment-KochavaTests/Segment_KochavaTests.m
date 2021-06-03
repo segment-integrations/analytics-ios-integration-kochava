@@ -19,6 +19,8 @@ describe(@"SegmentKochavaIntegration", ^{
     __block __strong SEGKochavaIntegration *integration;
     __block __strong KVATracker *mockTracker;
     __block __strong KVAIdentityLink *mockIdentityLink;
+    __block __strong Class mockKochavaEventManagerClass;
+    __block __strong KochavaEventManager *mockKochavaEventManager;
 
     beforeEach(^{
         mockTracker = mock(KVATracker.class);
@@ -26,13 +28,23 @@ describe(@"SegmentKochavaIntegration", ^{
         mockIdentityLink = mock(KVAIdentityLink.class);
         [given(mockTracker.identityLink) willReturn:mockIdentityLink];
 
-        [KochavaEventManager setShared:mock(KochavaEventManager.class)];
+        mockKochavaEventManagerClass = mockClass(KochavaEventManager.class);
+        mockKochavaEventManager = mock(KochavaEventManager.class);
+        
+        stubSingleton(mockKochavaEventManagerClass, shared);
+        [given(KochavaEventManager.shared) willReturn:mockKochavaEventManager];
+    });
+    
+    afterEach(^{
+        mockKochavaEventManagerClass = nil;
     });
 
     describe(@"Configurations", ^{
         __block __strong id<KVAAdNetworkProtocol> mockAdNetwork;
         __block __strong KVAAdNetworkConversion *mockConversion;
         __block __strong KVAAppTrackingTransparency *mockAtt;
+        __block __strong Class mockProductClass;
+        __block __strong KVAAdNetworkProduct *mockProduct;
 
         beforeEach(^{
             mockAdNetwork = mockProtocol(@protocol(KVAAdNetworkProtocol));
@@ -43,15 +55,47 @@ describe(@"SegmentKochavaIntegration", ^{
 
             mockAtt = mock(KVAAppTrackingTransparency.class);
             [given(mockTracker.appTrackingTransparency) willReturn:mockAtt];
+
+            mockProductClass = mockClass(KVAAdNetworkProduct.class);
+            mockProduct = mock(KVAAdNetworkProduct.class);
+            
+            stubSingleton(mockProductClass, shared);
+            [given(KVAAdNetworkProduct.shared) willReturn:mockProduct];
         });
         
-        it(@"uses the default tracker", ^{
-            integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
-                SKConfigApiKey: @"TEST_GUID"
-            }
-                                                        andKochavaTracker: nil];
+        afterEach(^{
+            mockProductClass = nil;
+        });
+        
+        describe(@"Shared Tracker", ^{
+            __block __strong Class mockSharedTrackerClass;
+            __block __strong KVATracker *mockSharedTracker;
 
-            expect(integration.tracker).to.equal(KVATracker.shared);
+            beforeEach(^{
+                mockSharedTrackerClass = mockClass(KVATracker.class);
+                mockSharedTracker = mock(KVATracker.class);
+                
+                stubSingleton(mockSharedTrackerClass, shared);
+                [given(KVATracker.shared) willReturn:mockSharedTracker];
+            });
+            
+            afterEach(^{
+                mockSharedTrackerClass = nil;
+            });
+            
+            it(@"uses the default tracker", ^{
+                integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
+                    SKConfigApiKey: @"TEST_GUID"
+                }
+                                                            andKochavaTracker: nil];
+
+                expect(integration.tracker).to.equal(KVATracker.shared);
+                expect(integration.tracker).to.equal(mockSharedTracker);
+                expect(integration.tracker).toNot.equal(mockTracker);
+
+                [verify(mockProduct) register];
+                
+            });
         });
 
         it(@"uses a custom tracker", ^{
@@ -66,6 +110,11 @@ describe(@"SegmentKochavaIntegration", ^{
             [verifyCount(mockConversion, never()) setDidUpdateValueBlock:anything()];
             [verifyCount(mockAdNetwork, never()) setDidRegisterAppForAttributionBlock:anything()];
             [verify(mockTracker) startWithAppGUIDString: @"TEST_GUID"];
+            [verify(mockProduct) register];
+
+            expect(KVATracker.shared).toNot.beNil();
+            expect(KVATracker.shared).toNot.equal(mockTracker);
+            expect(KVALog.shared).toNot.beNil();
         });
 
         it(@"subscribes to notifications", ^{
@@ -119,7 +168,14 @@ describe(@"SegmentKochavaIntegration", ^{
                                                                        @"Event Type": @"Some type"
                                                                    }
                                                                       context:@{}
-                                                                 integrations:@{}];
+                                                                 integrations:@{
+                                                                     @"Kochava iOS": @{
+                                                                             @"KochavaSpecificProperty": @"Test Value"
+                                                                     },
+                                                                     @"Some Other Integration": @{
+                                                                             @"SOIProp": @"Hello"
+                                                                     }
+                                                                 }];
             
             [givenVoid([KochavaEventManager.shared sendEvent:anything()]) willDo:^id(NSInvocation *invocation) {
                 KVAEvent *event = [invocation mkt_arguments][0];
@@ -127,7 +183,8 @@ describe(@"SegmentKochavaIntegration", ^{
                 expect(event.infoDictionary).to.equal(@{
                     @"Event Property 1": @"Property value",
                     @"Event Property 2": @"Some other value",
-                    @"Event Type": @"Some type"
+                    @"Event Type": @"Some type",
+                    @"KochavaSpecificProperty": @"Test Value"
                 });
                 return nil;
             }];
@@ -176,8 +233,11 @@ describe(@"SegmentKochavaIntegration", ^{
                                                                                  @"step": @"Creating New User"
                                                                              }
                                                                         integrations:@{
-                                                                            @"Kochava": @{
+                                                                            @"Kochava iOS": @{
                                                                                     @"a1": @"v2021"
+                                                                            },
+                                                                            @"Another Integration": @{
+                                                                                    @"Some Value": @"ABC"
                                                                             }
                                                                         }];
 
@@ -185,6 +245,8 @@ describe(@"SegmentKochavaIntegration", ^{
 
             [verify(mockIdentityLink) registerWithNameString:@"User ID" identifierString:@"dd7148953a72573614d38e4bbcb2a9a1"];
             [verify(mockIdentityLink) registerWithNameString:@"Login" identifierString:@"roger2031"];
+            [verify(mockIdentityLink) registerWithNameString:@"a1" identifierString:@"v2021"];
+            [verifyCount(mockIdentityLink, times(0)) registerWithNameString:@"Some Value" identifierString:@"ABC"];
         });
     });
 
