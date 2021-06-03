@@ -22,12 +22,11 @@ describe(@"SegmentKochavaIntegration", ^{
     __block __strong id<KVAAdNetworkProtocol> mockAdNetwork;
     __block __strong KVAAdNetworkConversion *mockConversion;
     __block __strong KVAAppTrackingTransparency *mockAppTrackingTransparency;
-    __block __strong Class mockKochavaEventManagerClass;
-    __block __strong KochavaEventManager *mockKochavaEventManager;
     __block __strong Class mockNetworkProductClass;
     __block __strong KVAAdNetworkProduct *mockProduct;
     __block __strong Class mockSharedTrackerClass;
     __block __strong KVATracker *mockSharedTracker;
+    __block __strong Class mockEventClass;
 
     beforeEach(^{
         mockCustomTracker = mock(KVATracker.class);
@@ -51,25 +50,21 @@ describe(@"SegmentKochavaIntegration", ^{
         stubSingleton(mockNetworkProductClass, shared);
         [given(KVAAdNetworkProduct.shared) willReturn:mockProduct];
 
-        // mock KochavaEventManager.shared
-        mockKochavaEventManagerClass = mockClass(KochavaEventManager.class);
-        mockKochavaEventManager = mock(KochavaEventManager.class);
-        
-        stubSingleton(mockKochavaEventManagerClass, shared);
-        [given(KochavaEventManager.shared) willReturn:mockKochavaEventManager];
-
         // mock KVATracker.shared
         mockSharedTrackerClass = mockClass(KVATracker.class);
         mockSharedTracker = mock(KVATracker.class);
         
         stubSingleton(mockSharedTrackerClass, shared);
         [given(KVATracker.shared) willReturn:mockSharedTracker];
+
+        // mock KVAEvent
+        mockEventClass = mockClass(KVAEvent.class);
     });
     
     afterEach(^{
-        mockKochavaEventManagerClass = nil;
         mockNetworkProductClass = nil;
         mockSharedTrackerClass = nil;
+        mockEventClass = nil;
     });
 
     describe(@"Configurations", ^{
@@ -147,7 +142,7 @@ describe(@"SegmentKochavaIntegration", ^{
         beforeEach(^{
             integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SKConfigApiKey:@"TEST_GUID"} andKochavaTracker:mockCustomTracker];
         });
-
+        
         it(@"tracks a normal event", ^{
             SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Some Test Event"
                                                                    properties:@{
@@ -165,19 +160,22 @@ describe(@"SegmentKochavaIntegration", ^{
                                                                      }
                                                                  }];
             
-            [givenVoid([KochavaEventManager.shared sendEvent:anything()]) willDo:^id(NSInvocation *invocation) {
-                KVAEvent *event = [invocation mkt_arguments][0];
-                expect(event.customEventNameString).to.equal(@"Some Test Event");
-                expect(event.infoDictionary).to.equal(@{
-                    @"Event Property 1": @"Property value",
-                    @"Event Property 2": @"Some other value",
-                    @"Event Type": @"Some type",
-                    @"KochavaSpecificProperty": @"Test Value"
-                });
-                return nil;
-            }];
+            stubSingleton(mockEventClass, customEventWithNameString:);
+            KVAEvent *mockEvent = mock(KVAEvent.class);
+            [given([KVAEvent customEventWithNameString:anything()]) willReturn:mockEvent];
+
+            stubSingleton(mockEventClass, eventWithType:);
+            KVAEvent *mockWrongEvent = mock(KVAEvent.class);
+            [given([KVAEvent eventWithType:anything()]) willReturn:mockWrongEvent];
 
             [integration track:payload];
+
+            [verify(mockEvent) setInfoDictionary:@{
+                @"Event Property 1": @"Property value",
+                @"Event Property 2": @"Some other value",
+                @"Event Type": @"Some type",
+                @"KochavaSpecificProperty": @"Test Value"
+            }];
         });
         
         it(@"Tracks deep links", ^{
@@ -189,19 +187,23 @@ describe(@"SegmentKochavaIntegration", ^{
                                                                       context:@{}
                                                                  integrations:@{}];
             
-            [givenVoid([KochavaEventManager.shared sendEvent:anything()]) willDo:^id(NSInvocation *invocation) {
-                KVAEvent *event = [invocation mkt_arguments][0];
-                expect(event.eventType.nameString.description).to.equal(KVAEventType.deeplink.nameString.description);
-                expect(event.customEventNameString).to.equal(SKTrackDeepLinkOpened);
-                expect(event.uriString.description).to.equal(@"https://www.xoom.com/documents");
-                expect(event.infoDictionary).to.equal(@{
-                    @"linkType": @"External",
-                    @"url": @"https://www.someothersite.com/redirect"
-                });
-                return nil;
-            }];
+            stubSingleton(mockEventClass, customEventWithNameString:);
+            KVAEvent *mockWrongEvent = mock(KVAEvent.class);
+            [given([KVAEvent customEventWithNameString:anything()]) willReturn:mockWrongEvent];
+
+            stubSingleton(mockEventClass, eventWithType:);
+            KVAEvent *mockEvent = mock(KVAEvent.class);
+            [given([KVAEvent eventWithType:anything()]) willReturn:mockEvent];
 
             [integration track:payload];
+
+            // [verify(mockEvent) setEventType:KVAEventType.deeplink];
+            [verify(mockEvent) setCustomEventNameString: SKTrackDeepLinkOpened];
+            [verify(mockEvent) setUriString: @"https://www.xoom.com/documents"];
+            [verify(mockEvent) setInfoDictionary: @{
+                @"linkType": @"External",
+                @"url": @"https://www.someothersite.com/redirect"
+            }];
         });
     });
     

@@ -22,14 +22,6 @@ FOUNDATION_EXPORT NSString *const SKIdentifyUserId;
 
 FOUNDATION_EXPORT NSString *const SKTrackDeepLinkOpened;
 
-@interface KochavaEventManager:NSObject
-
-+ (KochavaEventManager*)shared;
-
-- (void)sendEvent:(KVAEvent*)event;
-
-@end
-
 @interface SEGKochavaIntegration:NSObject<SEGIntegration>
 
 @property (atomic, strong) NSDictionary *settings;

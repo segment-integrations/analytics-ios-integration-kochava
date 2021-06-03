@@ -22,35 +22,14 @@ NSString *const SKIdentifyUserId = @"User ID";
 NSString *const SKTrackDeepLinkOpened = @"Deep Link Opened";
 NSString *const SKKochavaIntegrationName = @"Kochava iOS";
 
-@interface KochavaEventManager()
-
-@property (atomic, strong) KVATracker *tracker;
-
-@end
-
-
-@implementation KochavaEventManager
-
-static	 KochavaEventManager *sharedInstance = nil;
-
-+ (KochavaEventManager*)shared {
-    @synchronized(self) {
-        if (sharedInstance == nil) {
-            sharedInstance = [[KochavaEventManager alloc] init];
-        }
-        return sharedInstance;
-    }
-}
-
-- (void)sendEvent:(KVAEvent*)event {
-    [event sendWithSenderArray:@[self.tracker]];
-}
-
-@end
-
 
 @implementation SEGKochavaIntegration
 
+/**
+ Constructor method
+ @param settings NSDictionary integration settings provided by the segment server. Usually this is provided to this integration if the account owner has setup a "Kochava iOS" destination.
+ @param tracker KVATracker object to be used in this integration, if an alternative tracker is desired instead of the default shared tracker.
+ */
 - (instancetype)initWithSettings:(NSDictionary*)settings andKochavaTracker:(id)tracker {
     if (self = [super init]) {
         self.settings = settings;
@@ -65,8 +44,6 @@ static	 KochavaEventManager *sharedInstance = nil;
             self.tracker = KVATracker.shared;
         }
         
-        KochavaEventManager.shared.tracker = self.tracker;
-
         // SKAd notification subscription
         if ([settings[SKConfigSubscribeToNotifications] boolValue]) {
             KVAAdNetworkConversionDidUpdateValueBlock conversionDidUpdateValueBlock = ^(KVAAdNetworkConversion *_Nonnull conversion, KVAAdNetworkConversionResult *_Nonnull result) {
@@ -99,6 +76,10 @@ static	 KochavaEventManager *sharedInstance = nil;
     return self;
 }
 
+/**
+ Sends identifier properties to Kochava
+ @param payload SEGIdentifyPayload identity payload to process and send to Kochava
+ */
 -(void)identify:(SEGIdentifyPayload *)payload {
     [self.tracker.identityLink registerWithNameString:@"User ID" identifierString:payload.anonymousId];
     [self.tracker.identityLink registerWithNameString:@"Login" identifierString:payload.userId];
@@ -111,6 +92,18 @@ static	 KochavaEventManager *sharedInstance = nil;
     }
 }
 
+/**
+ Sends the event to the current Kochava tracker
+ @param event KVAEvent event to send to tracker
+ */
+- (void)sendEvent:(KVAEvent*)event {
+    [event sendWithSenderArray:@[self.tracker]];
+}
+
+/**
+ Sends the tracking payload to Kochava
+ @param payload SEGTrackPayload payload to process and send to Kochava
+ */
 -(void)track:(SEGTrackPayload*)payload {
     NSMutableDictionary *props = [[NSMutableDictionary alloc] initWithDictionary:payload.properties];
     if (payload.integrations[SKKochavaIntegrationName]) {
@@ -129,7 +122,7 @@ static	 KochavaEventManager *sharedInstance = nil;
         event.infoDictionary = props;
     }
     
-    [KochavaEventManager.shared sendEvent:event];
+    [self sendEvent:event];
 }
 
 @end
