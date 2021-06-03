@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:@"DO56rsqxxC3EB6YUL73C8ogGYB1ORJzJ"];
+    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:@"[SEGMENT WRITE KEY]"];
     configuration.trackApplicationLifecycleEvents = YES;
     configuration.flushAt = 1;
     [configuration use:[SEGKochavaIntegrationFactory instance]];
@@ -38,7 +38,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }
@@ -55,7 +55,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }
@@ -71,7 +71,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }
@@ -85,7 +85,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }
@@ -102,7 +102,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }

@@ -80,7 +80,7 @@ describe(@"SegmentKochavaIntegration", ^{
             });
             
             afterEach(^{
-                mockSharedTracker = nil;
+                mockSharedTrackerClass = nil;
             });
             
             it(@"uses the default tracker", ^{
@@ -111,6 +111,10 @@ describe(@"SegmentKochavaIntegration", ^{
             [verifyCount(mockAdNetwork, never()) setDidRegisterAppForAttributionBlock:anything()];
             [verify(mockTracker) startWithAppGUIDString: @"TEST_GUID"];
             [verify(mockProduct) register];
+
+            expect(KVATracker.shared).toNot.beNil();
+            expect(KVATracker.shared).toNot.equal(mockTracker);
+            expect(KVALog.shared).toNot.beNil();
         });
 
         it(@"subscribes to notifications", ^{
@@ -147,11 +151,6 @@ describe(@"SegmentKochavaIntegration", ^{
             [verify(mockAtt) setEnabledBool: YES];
             [verify(mockAtt) setAuthorizationStatusWaitTimeInterval: 1000.0];
             [verify(mockTracker) startWithAppGUIDString: @"TEST_GUID"];
-        });
-        
-        it(@"accesses Kochava API directly", ^{
-            expect(KVATracker.shared.sdkVersionString).to.startWith(@"libKochavaTracker");
-            
         });
     });
     
