@@ -70,12 +70,12 @@ static	 KochavaEventManager *sharedInstance = nil;
         // SKAd notification subscription
         if ([settings[SKConfigSubscribeToNotifications] boolValue]) {
             KVAAdNetworkConversionDidUpdateValueBlock conversionDidUpdateValueBlock = ^(KVAAdNetworkConversion *_Nonnull conversion, KVAAdNetworkConversionResult *_Nonnull result) {
-                NSLog(@"updateConversionValue() called with a value of %@", @(result.valueInt));
+                NSLog(@"SKAd Notification: updateConversionValue() called with a value of %@", @(result.valueInt));
             };
             self.tracker.adNetwork.conversion.didUpdateValueBlock = conversionDidUpdateValueBlock;
             
             KVAAdNetworkDidRegisterAppForAttributionBlock didRegisterAppForAttributionBlock = ^(KVAAdNetwork *_Nonnull adNetwork) {
-                NSLog(@"registerAppForAdNetworkAttribution() called");
+                NSLog(@"SKAd Notification: registerAppForAdNetworkAttribution() called");
             };
             self.tracker.adNetwork.didRegisterAppForAttributionBlock = didRegisterAppForAttributionBlock;
         }
