@@ -9,28 +9,146 @@
 #import <Segment-Kochava/SEGKochavaIntegrationFactory.h>
 #import <Segment-Kochava/SEGKochavaIntegration.h>
 #import <KochavaTrackeriOS/KochavaTracker.h>
-#import <KochavaCore.h>
+#import <KochavaCoreiOS/KochavaCore.h>
+#import <KochavaAdNetworkiOS/KochavaAdNetwork.h>
 
 
 SpecBegin(SegmentKochavaIntegration)
 
 describe(@"SegmentKochavaIntegration", ^{
     __block __strong SEGKochavaIntegration *integration;
-    __block __strong KVATracker *tracker;
-    __block __strong KVAIdentityLink *identityLink;
-    
+    __block __strong KVATracker *mockCustomTracker;
+    __block __strong KVAIdentityLink *mockIdentityLink;
+    __block __strong id<KVAAdNetworkProtocol> mockAdNetwork;
+    __block __strong KVAAdNetworkConversion *mockConversion;
+    __block __strong KVAAppTrackingTransparency *mockAppTrackingTransparency;
+    __block __strong Class mockKochavaEventManagerClass;
+    __block __strong KochavaEventManager *mockKochavaEventManager;
+    __block __strong Class mockNetworkProductClass;
+    __block __strong KVAAdNetworkProduct *mockProduct;
+    __block __strong Class mockSharedTrackerClass;
+    __block __strong KVATracker *mockSharedTracker;
+
     beforeEach(^{
-        tracker = mock(KVATracker.class);
-        identityLink = mock(KVAIdentityLink.class);
-        [given(tracker.identityLink) willReturn:identityLink];
+        mockCustomTracker = mock(KVATracker.class);
         
-        integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SK_ApiKey:@"TEST_GUID"} andKochavaTracker:tracker];
+        mockIdentityLink = mock(KVAIdentityLink.class);
+        [given(mockCustomTracker.identityLink) willReturn:mockIdentityLink];
+
+        mockAdNetwork = mockProtocol(@protocol(KVAAdNetworkProtocol));
+        [given(mockCustomTracker.adNetwork) willReturn:mockAdNetwork];
         
-        [KochavaEventManager setShared:mock(KochavaEventManager.class)];
+        mockConversion = mock(KVAAdNetworkConversion.class);
+        [given(mockAdNetwork.conversion) willReturn:mockConversion];
+
+        mockAppTrackingTransparency = mock(KVAAppTrackingTransparency.class);
+        [given(mockCustomTracker.appTrackingTransparency) willReturn:mockAppTrackingTransparency];
+
+        // mock KVAAdNetworkProduct.shared
+        mockNetworkProductClass = mockClass(KVAAdNetworkProduct.class);
+        mockProduct = mock(KVAAdNetworkProduct.class);
+        
+        stubSingleton(mockNetworkProductClass, shared);
+        [given(KVAAdNetworkProduct.shared) willReturn:mockProduct];
+
+        // mock KochavaEventManager.shared
+        mockKochavaEventManagerClass = mockClass(KochavaEventManager.class);
+        mockKochavaEventManager = mock(KochavaEventManager.class);
+        
+        stubSingleton(mockKochavaEventManagerClass, shared);
+        [given(KochavaEventManager.shared) willReturn:mockKochavaEventManager];
+
+        // mock KVATracker.shared
+        mockSharedTrackerClass = mockClass(KVATracker.class);
+        mockSharedTracker = mock(KVATracker.class);
+        
+        stubSingleton(mockSharedTrackerClass, shared);
+        [given(KVATracker.shared) willReturn:mockSharedTracker];
     });
     
-    describe(@"General Tracking", ^{
-        it(@"Tracks normal events", ^{
+    afterEach(^{
+        mockKochavaEventManagerClass = nil;
+        mockNetworkProductClass = nil;
+        mockSharedTrackerClass = nil;
+    });
+
+    describe(@"Configurations", ^{
+        it(@"uses the default tracker", ^{
+            integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
+                SKConfigApiKey: @"TEST_GUID"
+            }
+                                                        andKochavaTracker: nil];
+
+            expect(integration.tracker).to.equal(KVATracker.shared);
+            expect(integration.tracker).to.equal(mockSharedTracker);
+            expect(integration.tracker).toNot.equal(mockCustomTracker);
+
+            [verify(mockProduct) register];
+        });
+
+        it(@"uses a custom tracker", ^{
+            integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
+                SKConfigApiKey: @"TEST_GUID"
+            }
+                                                        andKochavaTracker: mockCustomTracker];
+
+            expect(integration.tracker).to.equal(mockCustomTracker);
+            [verifyCount(mockAppTrackingTransparency, never()) setEnabledBool:anything()];
+            [[verifyCount(mockAppTrackingTransparency, never()) withMatcher:anything()] setAuthorizationStatusWaitTimeInterval:0];
+            [verifyCount(mockConversion, never()) setDidUpdateValueBlock:anything()];
+            [verifyCount(mockAdNetwork, never()) setDidRegisterAppForAttributionBlock:anything()];
+            [verify(mockCustomTracker) startWithAppGUIDString: @"TEST_GUID"];
+            [verify(mockProduct) register];
+
+            expect(KVATracker.shared).to.equal(mockSharedTracker);
+            expect(KVATracker.shared).toNot.equal(mockCustomTracker);
+            expect(KVALog.shared).toNot.beNil();
+        });
+
+        it(@"subscribes to notifications", ^{
+            integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
+                SKConfigApiKey: @"TEST_GUID",
+                SKConfigSubscribeToNotifications: @YES
+            }
+                                                        andKochavaTracker: mockCustomTracker];
+
+            [verify(mockConversion) setDidUpdateValueBlock:notNilValue()];
+            [verify(mockAdNetwork) setDidRegisterAppForAttributionBlock:notNilValue()];
+            [verify(mockCustomTracker) startWithAppGUIDString: @"TEST_GUID"];
+        });
+
+        it(@"does not subscribe to notifications", ^{
+            integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
+                SKConfigApiKey: @"TEST_GUID"
+            }
+                                                        andKochavaTracker: mockCustomTracker];
+
+            [verifyCount(mockConversion, never()) setDidUpdateValueBlock:anything()];
+            [verifyCount(mockAdNetwork, never()) setDidRegisterAppForAttributionBlock:anything()];
+            [verify(mockCustomTracker) startWithAppGUIDString: @"TEST_GUID"];
+        });
+
+        it(@"enables application transparency ", ^{
+            integration = [[SEGKochavaIntegration alloc] initWithSettings: @{
+                SKConfigApiKey: @"TEST_GUID",
+                SKConfigEnforceATT: @YES,
+                SKConfigCustomPromptLength: @1000.0
+            }
+                                                        andKochavaTracker: mockCustomTracker];
+
+            [verify(mockAppTrackingTransparency) setEnabledBool: YES];
+            [verify(mockAppTrackingTransparency) setAuthorizationStatusWaitTimeInterval: 1000.0];
+            [verify(mockCustomTracker) startWithAppGUIDString: @"TEST_GUID"];
+        });
+    });
+    
+    
+    describe(@"Tracking", ^{
+        beforeEach(^{
+            integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SKConfigApiKey:@"TEST_GUID"} andKochavaTracker:mockCustomTracker];
+        });
+
+        it(@"tracks a normal event", ^{
             SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Some Test Event"
                                                                    properties:@{
                                                                        @"Event Property 1": @"Property value",
@@ -38,7 +156,14 @@ describe(@"SegmentKochavaIntegration", ^{
                                                                        @"Event Type": @"Some type"
                                                                    }
                                                                       context:@{}
-                                                                 integrations:@{}];
+                                                                 integrations:@{
+                                                                     @"Kochava iOS": @{
+                                                                             @"KochavaSpecificProperty": @"Test Value"
+                                                                     },
+                                                                     @"Some Other Integration": @{
+                                                                             @"SOIProp": @"Hello"
+                                                                     }
+                                                                 }];
             
             [givenVoid([KochavaEventManager.shared sendEvent:anything()]) willDo:^id(NSInvocation *invocation) {
                 KVAEvent *event = [invocation mkt_arguments][0];
@@ -46,7 +171,8 @@ describe(@"SegmentKochavaIntegration", ^{
                 expect(event.infoDictionary).to.equal(@{
                     @"Event Property 1": @"Property value",
                     @"Event Property 2": @"Some other value",
-                    @"Event Type": @"Some type"
+                    @"Event Type": @"Some type",
+                    @"KochavaSpecificProperty": @"Test Value"
                 });
                 return nil;
             }];
@@ -55,7 +181,7 @@ describe(@"SegmentKochavaIntegration", ^{
         });
         
         it(@"Tracks deep links", ^{
-            SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:SK_Track_DeepLinkOpened
+            SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:SKTrackDeepLinkOpened
                                                                    properties:@{
                                                                        @"linkType": @"External",
                                                                        @"url": @"https://www.someothersite.com/redirect"
@@ -66,7 +192,7 @@ describe(@"SegmentKochavaIntegration", ^{
             [givenVoid([KochavaEventManager.shared sendEvent:anything()]) willDo:^id(NSInvocation *invocation) {
                 KVAEvent *event = [invocation mkt_arguments][0];
                 expect(event.eventType.nameString.description).to.equal(KVAEventType.deeplink.nameString.description);
-                expect(event.customEventNameString).to.equal(SK_Track_DeepLinkOpened);
+                expect(event.customEventNameString).to.equal(SKTrackDeepLinkOpened);
                 expect(event.uriString.description).to.equal(@"https://www.xoom.com/documents");
                 expect(event.infoDictionary).to.equal(@{
                     @"linkType": @"External",
@@ -80,7 +206,11 @@ describe(@"SegmentKochavaIntegration", ^{
     });
     
     describe(@"Identification", ^{
-        it(@"Initial identification", ^{
+        beforeEach(^{
+            integration = [[SEGKochavaIntegration alloc] initWithSettings:@{SKConfigApiKey:@"TEST_GUID"} andKochavaTracker:mockCustomTracker];
+        });
+
+        it(@"initial identification", ^{
             SEGIdentifyPayload *payload = [[SEGIdentifyPayload alloc] initWithUserId:@"roger2031"
                                                                          anonymousId:@"dd7148953a72573614d38e4bbcb2a9a1"
                                                                               traits:@{
@@ -91,22 +221,20 @@ describe(@"SegmentKochavaIntegration", ^{
                                                                                  @"step": @"Creating New User"
                                                                              }
                                                                         integrations:@{
-                                                                            @"Kochava": @{
+                                                                            @"Kochava iOS": @{
                                                                                     @"a1": @"v2021"
+                                                                            },
+                                                                            @"Another Integration": @{
+                                                                                    @"Some Value": @"ABC"
                                                                             }
                                                                         }];
-            
-            [givenVoid([identityLink registerWithNameString:anything() identifierString:anything()]) willDo:^id(NSInvocation *invocation) {
-                NSString *name = [invocation mkt_arguments][0];
-                NSString *identifier = [invocation mkt_arguments][1];
-                expect(name).to.equal(@"User ID");
-                expect(identifier).to.equal(@"roger2031");
-                return nil;
-            }];
 
-            // [tracker.identityLink registerWithNameString:@"test" identifierString:@"test"];
-            
             [integration identify:payload];
+
+            [verify(mockIdentityLink) registerWithNameString:@"User ID" identifierString:@"dd7148953a72573614d38e4bbcb2a9a1"];
+            [verify(mockIdentityLink) registerWithNameString:@"Login" identifierString:@"roger2031"];
+            [verify(mockIdentityLink) registerWithNameString:@"a1" identifierString:@"v2021"];
+            [verifyCount(mockIdentityLink, times(0)) registerWithNameString:@"Some Value" identifierString:@"ABC"];
         });
     });
 
@@ -115,5 +243,36 @@ describe(@"SegmentKochavaIntegration", ^{
 SpecEnd
 
 SpecBegin(SegmentKochavaIntegrationFactory)
+
+describe(@"SegmentKochavaIntegrationFactory", ^{
+    __block __strong Class mockIntegrationClass;
+    __block __strong SEGAnalytics *mockAnalytics;
+
+    beforeEach(^{
+        mockIntegrationClass = mockClass(SEGKochavaIntegration.class);
+        mockAnalytics = mock(SEGAnalytics.class);
+    });
+    
+    afterEach(^{
+        mockIntegrationClass = nil;
+        mockAnalytics = nil;
+    });
+    
+    it(@"creates an integration instance", ^{
+        NSDictionary *settings = @{
+            SKConfigApiKey: @"TEST_GUID",
+            SKConfigEnforceATT: @YES,
+            SKConfigCustomPromptLength: @1000.0
+        };
+        
+        SEGKochavaIntegrationFactory *factory = [[SEGKochavaIntegrationFactory alloc] init];
+        SEGKochavaIntegration *integration = [factory createWithSettings:settings forAnalytics:mockAnalytics];
+        
+        expect(integration.tracker).toNot.beNil();
+        expect(integration.settings).to.equal(settings);
+        
+    });
+});
+
 
 SpecEnd

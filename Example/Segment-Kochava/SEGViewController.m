@@ -38,7 +38,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }
@@ -55,7 +55,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }
@@ -71,7 +71,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }
@@ -85,7 +85,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }
@@ -102,7 +102,7 @@
      }
      options:@{
          @"integrations": @{
-                 @"kochava": @{
+                 @"Kochava iOS": @{
                          @"a1": @"prop-v2021"
                  }
          }

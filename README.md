@@ -1,3 +1,9 @@
+# Segment Kochava Integration
+
+## Prerequisites
+
+While the Kochava integration communicates directly with Kochava servers from within the iOS application, you must configure a Kochava iOS destination from the Segment dashboard under https://www.segment.com. You can set a number of Kochava integration options when configuring the Kochava iOS destination.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
