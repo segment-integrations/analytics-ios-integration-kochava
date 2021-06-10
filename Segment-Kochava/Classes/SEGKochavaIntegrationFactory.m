@@ -1,5 +1,5 @@
-#include "SEGKochavaIntegrationFactory.h"
-#include "SEGKochavaIntegration.h"
+#include <SEGKochavaIntegrationFactory.h>
+#include <SEGKochavaIntegration.h>
 
 @implementation SEGKochavaIntegrationFactory
 
