@@ -27,6 +27,15 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8CFE90ED264205A500D96EC8"
+            BuildableName = "Segment-Kochava.app"
+            BlueprintName = "Segment-Kochava"
+            ReferencedContainer = "container:Segment-Kochava.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -35,16 +44,6 @@
                BlueprintIdentifier = "8CFE9108264205A600D96EC8"
                BuildableName = "Segment-KochavaTests.xctest"
                BlueprintName = "Segment-KochavaTests"
-               ReferencedContainer = "container:Segment-Kochava.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8CFE9113264205A600D96EC8"
-               BuildableName = "Segment-KochavaUITests.xctest"
-               BlueprintName = "Segment-KochavaUITests"
                ReferencedContainer = "container:Segment-Kochava.xcodeproj">
             </BuildableReference>
          </TestableReference>
