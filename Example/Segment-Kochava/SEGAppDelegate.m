@@ -7,7 +7,6 @@
 //
 
 #import "SEGAppDelegate.h"
-#import "KVATracker.h"
 
 @interface SEGAppDelegate ()
 

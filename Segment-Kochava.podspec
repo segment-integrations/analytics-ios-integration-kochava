@@ -13,8 +13,7 @@ Kochava for Segment
   spec.source       = { :git => "https://github.com/segment-integrations/analytics-ios-integration-kochava.git", :tag => "#{spec.version}" }
   spec.social_media_url	= 'https://twitter.com/segment'
   
-  spec.ios.deployment_target = '9.0'
-  spec.tvos.deployment_target = '9.0'
+  spec.ios.deployment_target = '11'
   spec.requires_arc = true
 
   spec.source_files  = "Segment-Kochava/Classes/**/*"

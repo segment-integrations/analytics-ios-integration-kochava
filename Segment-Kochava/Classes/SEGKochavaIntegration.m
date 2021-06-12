@@ -3,10 +3,10 @@
 // Pods
 //
 
-#import "SEGKochavaIntegration.h"
-#import <KochavaCore.h>
-#import <KochavaTracker.h>
-#import <KochavaAdNetwork.h>
+#import <SEGKochavaIntegration.h>
+#import <KochavaCoreiOS/KochavaCore.h>
+#import <KochavaTrackeriOS/KochavaTracker.h>
+#import <KochavaAdNetworkiOS/KochavaAdNetwork.h>
 
 #if defined(__has_include) && __has_include(<Analytics/SEGAnalytics.h>)
 #import <Analytics/SEGAnalyticsUtils.h>

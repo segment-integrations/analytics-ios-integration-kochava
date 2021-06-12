@@ -9,9 +9,9 @@
 #import "SEGViewController.h"
 #import <SEGKochavaIntegrationFactory.h>
 #import <Analytics/SEGAnalytics.h>
-#import <KochavaCore.h>
-#import <KochavaTracker.h>
-#import <KochavaAdNetwork.h>
+#import <KochavaCoreiOS/KochavaCore.h>
+#import <KochavaTrackeriOS/KochavaTracker.h>
+#import <KochavaAdNetworkiOS/KochavaAdNetwork.h>
 
 @interface SEGViewController ()
 

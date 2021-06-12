@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <KochavaTracker.h>
+#import <KochavaTrackeriOS/KochavaTracker.h>
 
 #if defined(__has_include) && __has_include(<Analytics/SEGAnalytics.h>)
 #import <Analytics/SEGIntegration.h>
