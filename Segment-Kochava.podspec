@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "Segment-Kochava"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "Kochava Integration for Segment's analytics-ios library."
 
   spec.description  = <<-DESC
