@@ -2,7 +2,9 @@
 
 ## Prerequisites
 
-While the Kochava integration communicates directly with Kochava servers from within the iOS application, you must configure a Kochava iOS destination from the Segment dashboard under https://www.segment.com. You can set a number of Kochava integration options when configuring the Kochava iOS destination.
+While the Kochava integration communicates directly with Kochava servers from within the iOS application, you must configure a Kochava iOS destination in your Segment workspace. You can set a number of Kochava integration options when configuring the Kochava iOS destination.
+
+This destination is currently in Private Beta and can only be accessed via a unique link. Please reach out to our team if you need access.
 
 ## Example
 
