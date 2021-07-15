@@ -11,12 +11,12 @@ lint:
 	pod lib lint --use-libraries --allow-warnings
 
 clean:
-	set -o pipefail && xcodebuild $(XC_ARGS) clean | xcpretty
+	(set -o pipefail && xcodebuild $(XC_ARGS) clean) | xcpretty
 
 build:
-	set -o pipefail && xcodebuild $(XC_ARGS) | xcpretty
+	(set -o pipefail && xcodebuild $(XC_ARGS)) | xcpretty
 
 test:
-	set -o pipefail && xcodebuild test $(XC_ARGS) | xcpretty --report junit
+	(set -o pipefail && xcodebuild test $(XC_ARGS)) | xcpretty --report junit
 
 .PHONY: clean install build test
