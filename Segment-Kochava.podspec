@@ -20,8 +20,8 @@ Kochava for Segment
   spec.static_framework = true
 
   spec.dependency 'Analytics'
-  spec.dependency 'KochavaCoreiOS', '~> 4.6.1'
-  spec.dependency 'KochavaTrackeriOS', '~> 4.6.1'
-  spec.dependency 'KochavaAdNetworkiOS', '~> 4.6.1'
+  spec.dependency 'KochavaCoreiOS', '~> 4.0'
+  spec.dependency 'KochavaTrackeriOS', '~> 4.0'
+  spec.dependency 'KochavaAdNetworkiOS', '~> 4.0'
 
 end
