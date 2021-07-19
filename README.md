@@ -15,7 +15,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 To install the Segment-Kochava integration, simply add this line to your [CocoaPods](http://cocoapods.org) `Podfile`:
 
 ```ruby
-pod "Segment-Kochava"
+pod 'Segment-Kochava', :git => 'https://github.com/segment-integrations/analytics-ios-integration-kochava.git'
 ```
 
 ## Usage
