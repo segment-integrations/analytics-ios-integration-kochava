@@ -42,9 +42,17 @@ static	 KochavaEventManager *sharedInstance = nil;
     }
 }
 
-- (void)sendEvent:(KVAEvent*)event {
-    [event sendWithSenderArray:@[self.tracker]];
+- (void)sendEvent:(id)event {
+    KVAEvent *kvaEvent = event;
+    [kvaEvent sendWithSenderArray:@[self.tracker]];
 }
+
+@end
+
+
+@interface SEGKochavaIntegration()
+
+@property (atomic, strong) KVATracker *kvaTracker;
 
 @end
 
@@ -65,27 +73,28 @@ static	 KochavaEventManager *sharedInstance = nil;
             self.tracker = KVATracker.shared;
         }
         
-        KochavaEventManager.shared.tracker = self.tracker;
+        self.kvaTracker = self.tracker;
+        KochavaEventManager.shared.tracker = self.kvaTracker;
 
         // SKAd notification subscription
         if ([settings[SKConfigSubscribeToNotifications] boolValue]) {
             KVAAdNetworkConversionDidUpdateValueBlock conversionDidUpdateValueBlock = ^(KVAAdNetworkConversion *_Nonnull conversion, KVAAdNetworkConversionResult *_Nonnull result) {
                 NSLog(@"SKAd Notification: updateConversionValue() called with a value of %@", @(result.valueInt));
             };
-            self.tracker.adNetwork.conversion.didUpdateValueBlock = conversionDidUpdateValueBlock;
+            self.kvaTracker.adNetwork.conversion.didUpdateValueBlock = conversionDidUpdateValueBlock;
             
             KVAAdNetworkDidRegisterAppForAttributionBlock didRegisterAppForAttributionBlock = ^(KVAAdNetwork *_Nonnull adNetwork) {
                 NSLog(@"SKAd Notification: registerAppForAdNetworkAttribution() called");
             };
-            self.tracker.adNetwork.didRegisterAppForAttributionBlock = didRegisterAppForAttributionBlock;
+            self.kvaTracker.adNetwork.didRegisterAppForAttributionBlock = didRegisterAppForAttributionBlock;
         }
         
         // App tracking transparency
         if (settings[SKConfigEnforceATT] != nil) {
-            self.tracker.appTrackingTransparency.enabledBool = [settings[SKConfigEnforceATT] boolValue];
+            self.kvaTracker.appTrackingTransparency.enabledBool = [settings[SKConfigEnforceATT] boolValue];
         }
         if (settings[SKConfigCustomPromptLength] != nil) {
-            self.tracker.appTrackingTransparency.authorizationStatusWaitTimeInterval = [settings[SKConfigCustomPromptLength] doubleValue];
+            self.kvaTracker.appTrackingTransparency.authorizationStatusWaitTimeInterval = [settings[SKConfigCustomPromptLength] doubleValue];
         }
         
         // if the API key isn't given, can't start the tracker.
@@ -100,13 +109,13 @@ static	 KochavaEventManager *sharedInstance = nil;
 }
 
 -(void)identify:(SEGIdentifyPayload *)payload {
-    [self.tracker.identityLink registerWithNameString:@"User ID" identifierString:payload.anonymousId];
-    [self.tracker.identityLink registerWithNameString:@"Login" identifierString:payload.userId];
+    [self.kvaTracker.identityLink registerWithNameString:@"User ID" identifierString:payload.anonymousId];
+    [self.kvaTracker.identityLink registerWithNameString:@"Login" identifierString:payload.userId];
     
     NSDictionary *integration = payload.integrations[SKKochavaIntegrationName];
     if (integration) {
         for (NSString *key in integration.allKeys) {
-            [self.tracker.identityLink registerWithNameString:key identifierString:[integration[key] stringValue]];
+            [self.kvaTracker.identityLink registerWithNameString:key identifierString:[integration[key] stringValue]];
         }
     }
 }

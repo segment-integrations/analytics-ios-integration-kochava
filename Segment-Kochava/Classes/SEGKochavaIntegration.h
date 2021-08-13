@@ -4,7 +4,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <KochavaTrackeriOS/KochavaTracker.h>
 
 #if defined(__has_include) && __has_include(<Analytics/SEGAnalytics.h>)
 #import <Analytics/SEGIntegration.h>
@@ -26,14 +25,14 @@ FOUNDATION_EXPORT NSString *const SKTrackDeepLinkOpened;
 
 + (KochavaEventManager*)shared;
 
-- (void)sendEvent:(KVAEvent*)event;
+- (void)sendEvent:(id)event;
 
 @end
 
 @interface SEGKochavaIntegration:NSObject<SEGIntegration>
 
 @property (atomic, strong) NSDictionary *settings;
-@property (atomic, strong) KVATracker *tracker;
+@property (atomic, strong) id tracker;
 
 - (instancetype)initWithSettings:(NSDictionary*)settings andKochavaTracker:(id)kochava;
 
