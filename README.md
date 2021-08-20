@@ -1,5 +1,7 @@
 # Segment Kochava Integration
 
+NOTE: This integration is currently in Private Beta.
+
 ## Prerequisites
 
 While the Kochava integration communicates directly with Kochava servers from within the iOS application, you must configure a Kochava iOS destination in your Segment workspace. You can set a number of Kochava integration options when configuring the Kochava iOS destination.
